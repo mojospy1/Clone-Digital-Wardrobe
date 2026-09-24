@@ -7,22 +7,11 @@ import { CategoryModule } from './category/category.module';
 import { ClothingModule } from './clothing/clothing.module';
 import { OutfitModule } from './outfit/outfit.module';
 import { OutfitItemModule } from './outfit-item/outfit-item.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.DB_HOST ?? 'localhost',
-      port: Number(process.env.DB_PORT ?? 3306),
-      username: process.env.DB_USER ?? 'root',
-      password: process.env.DB_PASSWORD ?? '',
-      database: process.env.DB_NAME ?? 'digital_wardrobe',
-      autoLoadEntities: true,
-      synchronize: false,
-    }),
     // Distributed tracing, auto-correlated logs, request/job metrics, error
     // telemetry, alarms, and more — out of the box. Sign up at https://observe.nestjs.com
     ObserveModule.forRoot({
