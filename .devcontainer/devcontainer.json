@@ -1,17 +1,36 @@
 {
-  "name": "Digital Wardrobe Group",
-  "image": "mcr.microsoft.com/devcontainers/base:debian",
-  "features": {
-    "ghcr.io/devcontainers/features/node:2.1.0": {
-      "version": "lts"
+  "name": "Digital Wardrobe",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "runServices": ["app", "db"],
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  "overrideCommand": false,
+  "remoteUser": "node",
+  "forwardPorts": [3000, 9000, 3306],
+  "portsAttributes": {
+    "3000": {
+      "label": "NestJS API",
+      "onAutoForward": "notify"
+    },
+    "9000": {
+      "label": "Express API",
+      "onAutoForward": "silent"
+    },
+    "3306": {
+      "label": "MariaDB",
+      "onAutoForward": "silent"
     }
   },
+  "postCreateCommand": "npm install && npm --prefix backend install",
   "customizations": {
     "vscode": {
       "extensions": [
-        "GitHub.copilot"
+        "dbaeumer.vscode-eslint",
+        "ms-azuretools.vscode-docker",
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-mysql"
       ]
     }
-  },
-  "postCreateCommand": "cd backend && npm install"
+  }
 }
