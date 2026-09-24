@@ -8,6 +8,7 @@ import { ClothingModule } from './clothing/clothing.module';
 import { OutfitModule } from './outfit/outfit.module';
 import { OutfitItemModule } from './outfit-item/outfit-item.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { databaseProviders } from './database/database.provider';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -37,6 +38,6 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     OutfitItemModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ...databaseProviders],
 })
 export class AppModule {}
